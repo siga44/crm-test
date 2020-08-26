@@ -1,0 +1,100 @@
+<template>
+  <li class="order-list--row">
+    <span class="order-list--column">{{ order.orderNumber }}</span>
+    <span class="order-list--column">{{ order.date }}</span>
+    <span class="order-list--column">{{ order.company }}</span>
+    <span class="order-list--column">{{ order.courierName }}</span>
+    <span class="order-list--column">{{ order.phoneNumber }}</span>
+    <div class="order-list--options">
+      <a :href="order.atiCode">
+        <Button type="rounded neutral">
+          <img :src="options.atiLink.src" :alt="options.atiLink.id" />
+        </Button>
+      </a>
+      <router-link :to="`/orders/${order._id}`">
+        <Button type="rounded neutral">
+          <img :src="options.edit.src" :alt="options.edit.id" />
+        </Button>
+      </router-link>
+      <span @click="deleteOrder">
+        <Button type="rounded neutral">
+          <img :src="options.delete.src" :alt="options.delete.id" />
+        </Button>
+      </span>
+    </div>
+  </li>
+</template>
+
+<script>
+import deleteIcon from "@/assets/icons/delete.svg";
+import editIcon from "@/assets/icons/square-edit-outline.svg";
+import linkIcon from "@/assets/icons/open-in-new.svg";
+
+import Button from "@/components/Button";
+
+export default {
+  props: ["order"],
+  components: {
+    Button,
+  },
+  data() {
+    return {
+      options: {
+        atiLink: { id: "external-link", src: linkIcon },
+        edit: { id: "edit", src: editIcon },
+        delete: { id: "delete", src: deleteIcon },
+      },
+    };
+  },
+  methods: {
+    deleteOrder() {
+      console.log(this.order._id);
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.order-list {
+  &--row {
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #000;
+    padding: 0.5em 1.5em;
+    border-radius: 10px;
+    transition: background-color 0.133s ease-in-out;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      &,
+      .order-list--options {
+        opacity: 1;
+      }
+    }
+  }
+  &--column {
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 1em;
+    margin-right: 50px;
+    &:first-child {
+      width: 30px;
+    }
+    &:last-child {
+      width: 130px;
+      margin-right: 0;
+    }
+  }
+  &--options {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 120px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+}
+</style>

@@ -10,7 +10,10 @@
 * {
   font-family: "Roboto", sans-serif;
 }
-
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .container {
   max-width: 1200px;
   margin: 50px auto;

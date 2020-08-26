@@ -1,19 +1,21 @@
 <template>
   <div class="toolbar">
-    <Button type="success">Создать заявку</Button>
+    <router-link :to="{name: 'Create'}">
+      <Button type="success">Создать заявку</Button>
+    </router-link>
   </div>
 </template>
 
 <script>
-import Button from '@/components/Button'
+import Button from "@/components/Button";
 export default {
   components: {
-    Button
-  }
-}
+    Button,
+  },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .toolbar {
   width: 100%;
   height: 2em;

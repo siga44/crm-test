@@ -1,35 +1,37 @@
 <template>
   <div class="table">
     <div class="table--column-wrapper">
-      <span v-for="col in cols" :key="col.id" class="table--column-item">
-        {{ col.title }}
-      </span>
+      <span v-for="col in cols" :key="col.id" class="table--column-item">{{ col.title }}</span>
     </div>
     <ul class="order-list">
-      <ListItem />
+      <ListItem :order="order" v-for="order in orders" :key="order._id" />
     </ul>
   </div>
 </template>
 
 <script>
-import ListItem from '@/components/ListItem'
+import ListItem from "@/components/ListItem";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters(["orders"]),
+  },
   components: {
-    ListItem
+    ListItem,
   },
   data() {
     return {
       cols: [
-        { id: 'orderNumber', title: '№' },
-        { id: 'receivingDate', title: 'Дата получения' },
-        { id: 'companyName', title: 'Название фирмы' },
-        { id: 'courierName', title: 'ФИО перевозчика' },
-        { id: 'phone', title: 'Телефон' }
-      ]
-    }
-  }
-}
+        { id: "orderNumber", title: "№" },
+        { id: "receivingDate", title: "Дата получения" },
+        { id: "companyName", title: "Название фирмы" },
+        { id: "courierName", title: "ФИО перевозчика" },
+        { id: "phone", title: "Телефон" },
+      ],
+    };
+  },
+};
 </script>
 
 <style lang="scss">

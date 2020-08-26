@@ -8,8 +8,8 @@
 
 <script>
 export default {
-  props: ['type']
-}
+  props: ["type"],
+};
 </script>
 
 <style lang="scss">
@@ -28,7 +28,9 @@ export default {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
   color: #000;
   opacity: 0.85;
-  transition: opacity 0.133s ease-in-out;
+  transition-property: opacity, background-color;
+  transition-duration: 0.133s;
+  transition-timing-function: ease-in-out;
   cursor: pointer;
 
   &:hover {
@@ -47,6 +49,12 @@ export default {
     height: 30px;
     padding: 0;
     border-radius: 50%;
+    box-shadow: none;
+    opacity: 0.5;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      opacity: 1;
+    }
   }
   &-neutral {
     color: #000;
