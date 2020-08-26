@@ -1,0 +1,65 @@
+<template>
+  <div class="table">
+    <div class="table--column-wrapper">
+      <span v-for="col in cols" :key="col.id" class="table--column-item">
+        {{ col.title }}
+      </span>
+    </div>
+    <ul class="order-list">
+      <ListItem />
+    </ul>
+  </div>
+</template>
+
+<script>
+import ListItem from '@/components/ListItem'
+
+export default {
+  components: {
+    ListItem
+  },
+  data() {
+    return {
+      cols: [
+        { id: 'orderNumber', title: '№' },
+        { id: 'receivingDate', title: 'Дата получения' },
+        { id: 'companyName', title: 'Название фирмы' },
+        { id: 'courierName', title: 'ФИО перевозчика' },
+        { id: 'phone', title: 'Телефон' }
+      ]
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.table {
+  border-top: 3px solid #000;
+  padding: 2em 0;
+  width: 100%;
+  &--column {
+    &-wrapper {
+      padding: 0.5em 1.5em;
+    }
+    &-item {
+      display: inline-block;
+      text-align: center;
+      width: 180px;
+      font-size: 1.2em;
+      margin-right: 50px;
+      &:first-child {
+        width: 30px;
+      }
+      &:last-child {
+        width: 150px;
+      }
+    }
+  }
+}
+
+.order-list {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+</style>
