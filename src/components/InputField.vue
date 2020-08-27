@@ -1,23 +1,33 @@
 <template>
   <div class="input-wrapper">
-    <label :for="id" class="input-label">
+    <label :for="index" class="input-label">
       <slot></slot>
     </label>
-    <input :id="id" class="input-field" type="text" :placeholder="placeholder" :value="value" />
+    <input :id="index" class="input-field" :type="htmlType" @change="onChange" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["placeholder", "id", "value"],
+  props: ["index", "htmlType"],
+  methods: {
+    onChange({ target }) {
+      this.$emit("update", target.value, this.index);
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .input {
   &-wrapper {
+    margin-bottom: 2em;
+  }
+  &-label {
+    padding-left: 1em;
   }
   &-field {
+    min-width: 250px;
     display: flex;
     justify-content: start;
     align-items: center;

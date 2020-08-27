@@ -41,11 +41,17 @@ export default new Vuex.Store({
   mutations: {
     deleteOrder(state, id) {
       state.orders = state.orders.filter(order => order._id !== id)
+    },
+    createOrder(state, newOrder) {
+      state.orders = [newOrder, ...state.orders]
     }
   },
   actions: {
     deleteOrder({ commit }, id) {
       commit('deleteOrder', id)
+    },
+    createOrder({ commit }, payload) {
+      commit('createOrder', payload)
     }
   },
   getters: {
