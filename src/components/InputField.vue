@@ -3,13 +3,22 @@
     <label :for="index" class="input-label">
       <slot></slot>
     </label>
-    <input :id="index" class="input-field" :required="required" :type="htmlType" @change="onChange" />
+    <input
+      :id="index"
+      class="input-field"
+      :placeholder="placeholder || ''"
+      :required="required"
+      :type="htmlType"
+      :value="value"
+      :disabled="disabled"
+      @change="onChange"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["index", "htmlType", "required"],
+  props: ["index", "htmlType", "required", "placeholder", "value", "disabled"],
   methods: {
     onChange({ target }) {
       this.$emit("update", target.value, this.index);
@@ -27,7 +36,7 @@ export default {
     padding-left: 1em;
   }
   &-field {
-    min-width: 250px;
+    min-width: 300px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -35,6 +44,10 @@ export default {
     background-color: #eee;
     padding: 0.5em 1em;
     margin: 0.5em;
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
   }
 }
 </style>

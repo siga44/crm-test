@@ -1,49 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { initialState } from '@/constants'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    orders: [
-      {
-        _id: Date.now().toString(16),
-        orderNumber: 1,
-        date: '22.08.2020',
-        company: 'YetiCrab',
-        courierName: 'Квашнин С.Е.',
-        phoneNumber: '80123456789',
-        comments: ['Номер получателя: 89876543210'],
-        atiCode: 'https://ati.su/firms/12345/info'
-      },
-      {
-        _id: Date.now().toString(16) + 1,
-        orderNumber: 2,
-        date: '23.08.2020',
-        company: 'YetiCrab',
-        courierName: 'Квашнин С.Е.',
-        phoneNumber: '80123456789',
-        comments: ['Номер получателя: 89876543210'],
-        atiCode: 'https://ati.su/firms/14145/info'
-      },
-      {
-        _id: Date.now().toString(16) + 2,
-        orderNumber: 3,
-        date: '23.08.2020',
-        company: 'YetiCrab',
-        courierName: 'Квашнин С.Е.',
-        phoneNumber: '80123456789',
-        comments: ['Номер получателя: 89876543210'],
-        atiCode: 'https://ati.su/firms/14145/info'
-      }
-    ]
-  },
+  state: JSON.parse(localStorage.getItem('orders-state')) || initialState,
   mutations: {
     deleteOrder(state, id) {
       state.orders = state.orders.filter(order => order._id !== id)
+      localStorage.setItem('orders-state', JSON.stringify(state))
     },
     createOrder(state, newOrder) {
       state.orders = [newOrder, ...state.orders]
+      localStorage.setItem('orders-state', JSON.stringify(state))
+    },
+    updateOrder(state, changedOrder) {
+      const index = state.orders.findIndex(order => order.id === changedOrder.id)
+      const orders = [...state.orders]
+      orders[index] = { ...state.orders[index], ...changedOrder }
+
+      state.orders = orders
+      localStorage.setItem('orders-state', JSON.stringify(state))
     }
   },
   actions: {
@@ -52,6 +30,9 @@ export default new Vuex.Store({
     },
     createOrder({ commit }, payload) {
       commit('createOrder', payload)
+    },
+    updateOrder({ commit }, payload) {
+      commit('updateOrder', payload)
     }
   },
   getters: {

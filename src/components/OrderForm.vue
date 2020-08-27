@@ -1,17 +1,10 @@
 <template>
   <div class="form-wrapper">
     <h2 class="form-title">{{content.title}}</h2>
+
     <form class="form" @submit.prevent="onSubmit">
-      <div class="form-content">
-        <InputField
-          v-for="(label, index) in labels"
-          :required="label.text === 'Комментарии' ? false : true"
-          :key="index"
-          :htmlType="label.type"
-          :index="index"
-          @update="onInputChange"
-        >{{label.text}}</InputField>
-      </div>
+      <EditOrderForm @update="onInputChange" class="form-content" v-if="order" :order="order" />
+      <CreateOrderForm v-else class="form-content" @update="onInputChange" />
       <div class="form-buttons">
         <Button type="success" htmlType="submit">{{content.successButton}}</Button>
         <Button type="danger" htmlType="button" @onreject="onReject">{{content.dangerButton}}</Button>
@@ -23,27 +16,20 @@
 <script>
 import { mapActions } from "vuex";
 
-import InputField from "@/components/InputField";
+import CreateOrderForm from "@/components/CreateOrderForm";
+import EditOrderForm from "@/components/EditOrderForm";
 import Button from "@/components/Button";
 
 export default {
-  props: ["content"],
+  props: ["content", "order"],
   components: {
-    InputField,
     Button,
+    CreateOrderForm,
+    EditOrderForm,
   },
   data() {
     return {
-      labels: [
-        { type: "number", text: "Номер заказа" },
-        { type: "date", text: "Дата" },
-        { type: "text", text: "Название компании" },
-        { type: "text", text: "ФИО Перевозчика" },
-        { type: "tel", text: "Телефон" },
-        { type: "text", text: "Комментарии" },
-        { type: "url", text: "АТИ" },
-      ],
-      currentOrder: {
+      currentOrder: this.order || {
         orderNumber: null,
         date: null,
         company: null,
@@ -55,21 +41,28 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["createOrder"]),
+    ...mapActions(["createOrder", "updateOrder"]),
     onInputChange(value, index) {
       const key = Object.keys(this.currentOrder)[index];
       if (key === "comments") {
         this.currentOrder[key].push(value);
+      } else if (key === "date") {
+        const date = new Date(value);
+        this.currentOrder[key] = date.toLocaleDateString();
       } else {
         this.currentOrder[key] = value;
       }
     },
     onSubmit() {
-      const newOrder = {
-        _id: Date.now().toString(32),
-        ...this.currentOrder,
-      };
-      this.createOrder(newOrder);
+      if (this.order) {
+        this.updateOrder(this.currentOrder);
+      } else {
+        const newOrder = {
+          _id: Date.now().toString(32),
+          ...this.currentOrder,
+        };
+        this.createOrder(newOrder);
+      }
       this.$router.push("/");
     },
     onReject() {
@@ -94,9 +87,9 @@ export default {
     margin-bottom: 2em;
   }
   &-buttons {
-    width: 250px;
+    width: 350px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 }
 </style>

@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss">
 .btn {
-  font-family: Roboto;
+  min-width: 150px;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -54,6 +54,7 @@ export default {
     background-color: rgb(200, 20, 20);
   }
   &-rounded {
+    min-width: auto;
     width: 30px;
     height: 30px;
     padding: 0;
