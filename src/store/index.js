@@ -15,11 +15,39 @@ export default new Vuex.Store({
         phoneNumber: '80123456789',
         comments: ['Номер получателя: 89876543210'],
         atiCode: 'https://ati.su/firms/12345/info'
+      },
+      {
+        _id: Date.now().toString(16) + 1,
+        orderNumber: 2,
+        date: '23.08.2020',
+        company: 'YetiCrab',
+        courierName: 'Квашнин С.Е.',
+        phoneNumber: '80123456789',
+        comments: ['Номер получателя: 89876543210'],
+        atiCode: 'https://ati.su/firms/14145/info'
+      },
+      {
+        _id: Date.now().toString(16) + 2,
+        orderNumber: 3,
+        date: '23.08.2020',
+        company: 'YetiCrab',
+        courierName: 'Квашнин С.Е.',
+        phoneNumber: '80123456789',
+        comments: ['Номер получателя: 89876543210'],
+        atiCode: 'https://ati.su/firms/14145/info'
       }
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    deleteOrder(state, id) {
+      state.orders = state.orders.filter(order => order._id !== id)
+    }
+  },
+  actions: {
+    deleteOrder({ commit }, id) {
+      commit('deleteOrder', id)
+    }
+  },
   getters: {
     orders: ({ orders }) =>
       orders.map(order => ({

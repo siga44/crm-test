@@ -1,5 +1,6 @@
 <template>
   <button
+    :type="htmlType || ''"
     :class="`btn ${type ? (type.search(/\s/) !== -1 ? `btn-${type.split(' ').join(' btn-')}` : `btn-${type}`) : ''}`"
   >
     <slot></slot>
@@ -8,7 +9,7 @@
 
 <script>
 export default {
-  props: ["type"],
+  props: ["type", "htmlType"],
 };
 </script>
 

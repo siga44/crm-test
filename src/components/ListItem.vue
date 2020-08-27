@@ -16,7 +16,7 @@
           <img :src="options.edit.src" :alt="options.edit.id" />
         </Button>
       </router-link>
-      <span @click="deleteOrder">
+      <span @click="deleteOrder(order._id)">
         <Button type="rounded neutral">
           <img :src="options.delete.src" :alt="options.delete.id" />
         </Button>
@@ -31,6 +31,7 @@ import editIcon from "@/assets/icons/square-edit-outline.svg";
 import linkIcon from "@/assets/icons/open-in-new.svg";
 
 import Button from "@/components/Button";
+import { mapActions } from "vuex";
 
 export default {
   props: ["order"],
@@ -47,9 +48,7 @@ export default {
     };
   },
   methods: {
-    deleteOrder() {
-      console.log(this.order._id);
-    },
+    ...mapActions(["deleteOrder"]),
   },
 };
 </script>
