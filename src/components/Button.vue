@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="onClick"
     :type="htmlType || ''"
     :class="`btn ${type ? (type.search(/\s/) !== -1 ? `btn-${type.split(' ').join(' btn-')}` : `btn-${type}`) : ''}`"
   >
@@ -10,6 +11,13 @@
 <script>
 export default {
   props: ["type", "htmlType"],
+  methods: {
+    onClick() {
+      if (this.type.includes("danger")) {
+        this.$emit("onreject");
+      }
+    },
+  },
 };
 </script>
 

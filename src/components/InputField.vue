@@ -3,13 +3,13 @@
     <label :for="index" class="input-label">
       <slot></slot>
     </label>
-    <input :id="index" class="input-field" :type="htmlType" @change="onChange" />
+    <input :id="index" class="input-field" :required="required" :type="htmlType" @change="onChange" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["index", "htmlType"],
+  props: ["index", "htmlType", "required"],
   methods: {
     onChange({ target }) {
       this.$emit("update", target.value, this.index);
