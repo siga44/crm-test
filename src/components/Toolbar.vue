@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import Button from "@/components/Button";
+import Button from '@/components/Button';
+
 export default {
   components: {
-    Button,
-  },
+    Button
+  }
 };
 </script>
 

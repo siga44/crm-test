@@ -7,33 +7,31 @@
       :value="values[index]"
       :index="index"
       @update="onChange"
-    >{{key}}</InputField>
+    >{{ key }}
+    </InputField>
   </div>
 </template>
 
 <script>
-import InputField from "@/components/InputField";
+import InputField from '@/components/InputField';
 
-import { keysToLabels } from "@/utils";
+import { keysToLabels } from '@/utils';
 
 export default {
   components: {
-    InputField,
+    InputField
   },
-  props: ["order"],
-  data() {
+  props: ['order'],
+  data () {
     return {
       keys: keysToLabels(Object.keys(this.order)),
-      values: Object.values(this.order),
+      values: Object.values(this.order)
     };
   },
   methods: {
-    onChange(value, index) {
-      this.$emit("update", value, index);
-    },
-  },
+    onChange (value, index) {
+      this.$emit('update', value, index);
+    }
+  }
 };
 </script>
-
-<style lang="scss">
-</style>

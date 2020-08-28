@@ -1,28 +1,28 @@
 <template>
-  <OrderForm :content="content" :order="order" />
+  <OrderForm :content="content" :order="order"/>
 </template>
 
 <script>
-import OrderForm from "@/components/OrderForm";
+import OrderForm from '@/components/OrderForm';
 
 export default {
   components: {
-    OrderForm,
+    OrderForm
   },
   computed: {
-    order() {
+    order () {
       return this.$store.getters.order(this.$route.params.id);
-    },
+    }
   },
-  data() {
+  data () {
     return {
       content: {
-        title: "Редактирование заказа",
-        successButton: "Сохранить",
-        dangerButton: "Отмена",
-      },
+        title: 'Редактирование заказа',
+        successButton: 'Сохранить',
+        dangerButton: 'Отмена'
+      }
     };
-  },
+  }
 };
 </script>
 

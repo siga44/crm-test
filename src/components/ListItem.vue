@@ -52,8 +52,8 @@ export default {
   },
   methods: {
     ...mapActions(['deleteOrder']),
-    onCommentsClick() {
-      console.log(this.order.comments)
+    onCommentsClick () {
+      this.$emit('comments-click', this.order._id)
     }
   }
 };

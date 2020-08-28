@@ -12,31 +12,40 @@
       :value="value"
       :disabled="disabled"
       @change="onChange"
+      @keypress.enter="onEnter"
     />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["index", "htmlType", "required", "placeholder", "value", "disabled"],
+  props: ['index', 'htmlType', 'required', 'placeholder', 'value', 'disabled'],
   methods: {
-    onChange({ target }) {
-      this.$emit("update", target.value, this.index);
+    onChange ({ target }) {
+      this.$emit('update', target.value, this.index);
     },
-  },
+    onEnter ({ target }) {
+      this.$emit('onenter', target.value)
+      target.value = ''
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 .input {
+  min-width: 300px;
+
   &-wrapper {
     margin-bottom: 2em;
   }
+
   &-label {
     padding-left: 1em;
   }
+
   &-field {
-    min-width: 300px;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -44,6 +53,7 @@ export default {
     background-color: #eee;
     padding: 0.5em 1em;
     margin: 0.5em;
+
     &:disabled {
       opacity: 0.7;
       cursor: not-allowed;

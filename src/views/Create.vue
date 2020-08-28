@@ -1,23 +1,27 @@
 <template>
-  <OrderForm :content="content" />
+  <OrderForm :content="content"/>
 </template>
 
 <script>
-import OrderForm from "@/components/OrderForm";
+// TODO: В форме создания заказа не верно индексируются поля
+// TODO: Проблема с полями ATI и комментариями
+// TODO: Можно исправить геттер в сторе чтобы он отдавал заказ без поля комментов
+// TODO: Либо посмотреть что можно исправить во вьюхе Create
+import OrderForm from '@/components/OrderForm';
 
 export default {
   components: {
-    OrderForm,
+    OrderForm
   },
-  data() {
+  data () {
     return {
       content: {
-        title: "Создание заявки",
-        successButton: "Создать",
-        dangerButton: "Отмена",
-      },
+        title: 'Создание заявки',
+        successButton: 'Создать',
+        dangerButton: 'Отмена'
+      }
     };
-  },
+  }
 };
 </script>
 

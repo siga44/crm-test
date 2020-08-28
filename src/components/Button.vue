@@ -10,16 +10,16 @@
 
 <script>
 export default {
-  props: ["type", "htmlType"],
+  props: ['type', 'htmlType'],
   methods: {
-    onClick() {
-      if (this.type.includes("danger")) {
-        this.$emit("onreject");
+    onClick () {
+      if (this.type.includes('danger')) {
+        this.$emit('onreject');
         return
       }
       this.$emit('click')
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -47,14 +47,17 @@ export default {
   &:hover {
     opacity: 1;
   }
+
   &-success {
     color: #fff;
     background-color: rgb(65, 143, 34);
   }
+
   &-danger {
     color: #fff;
     background-color: rgb(200, 20, 20);
   }
+
   &-rounded {
     min-width: auto;
     width: 30px;
@@ -63,18 +66,22 @@ export default {
     border-radius: 50%;
     box-shadow: none;
     opacity: 0.5;
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.3);
       opacity: 1;
     }
   }
+
   &-neutral {
     color: #000;
     background-color: transparent;
   }
+
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+
     &:hover {
       opacity: 0.5;
     }

@@ -1,22 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { initialState } from '@/constants'
+import { elementById, indexById } from '@/utils';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: JSON.parse(localStorage.getItem('orders-state')) || initialState,
   mutations: {
-    deleteOrder(state, id) {
+    deleteOrder (state, id) {
       state.orders = state.orders.filter(order => order._id !== id)
       localStorage.setItem('orders-state', JSON.stringify(state))
     },
-    createOrder(state, newOrder) {
+    createOrder (state, newOrder) {
       state.orders = [newOrder, ...state.orders]
       localStorage.setItem('orders-state', JSON.stringify(state))
     },
-    updateOrder(state, changedOrder) {
-      const index = state.orders.findIndex(order => order.id === changedOrder.id)
+    updateOrder (state, changedOrder) {
+      const index = indexById(state.orders, changedOrder.id)
       const orders = [...state.orders]
       orders[index] = { ...state.orders[index], ...changedOrder }
 
@@ -25,18 +26,18 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    deleteOrder({ commit }, id) {
+    deleteOrder ({ commit }, id) {
       commit('deleteOrder', id)
     },
-    createOrder({ commit }, payload) {
+    createOrder ({ commit }, payload) {
       commit('createOrder', payload)
     },
-    updateOrder({ commit }, payload) {
+    updateOrder ({ commit }, payload) {
       commit('updateOrder', payload)
     }
   },
   getters: {
     orders: s => s.orders,
-    order: ({ orders }) => id => orders.find(({ _id }) => _id === id)
+    order: ({ orders }) => id => elementById(orders, id)
   }
 })

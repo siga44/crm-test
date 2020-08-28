@@ -14,9 +14,17 @@ export const keysToLabels = arr => {
       case 'phoneNumber':
         return 'Номер телефона'
       case 'comments':
-        return 'Комментарии'
+        break
       case 'atiCode':
         return 'АТИ'
     }
   })
+}
+
+export const indexById = (arr, id) => {
+  return arr.findIndex(item => item._id === id)
+}
+
+export const elementById = (arr, id) => {
+  return arr.find(item => item._id === id)
 }
