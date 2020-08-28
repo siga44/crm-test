@@ -15,7 +15,9 @@ export default {
     onClick() {
       if (this.type.includes("danger")) {
         this.$emit("onreject");
+        return
       }
+      this.$emit('click')
     },
   },
 };

@@ -36,11 +36,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    orders: ({ orders }) =>
-      orders.map(order => ({
-        ...order,
-        comments: order.comments.length
-      })),
+    orders: s => s.orders,
     order: ({ orders }) => id => orders.find(({ _id }) => _id === id)
   }
 })
