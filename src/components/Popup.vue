@@ -3,22 +3,22 @@
     <div class="popup--header">
       <h3 class="popup--title">Комментарии</h3>
       <Button
-        @click="onClose"
         style="transform: rotate(45deg); opacity: 1"
-        type="neutral rounded"><img :src="closeIcon" alt="close"
+        type="neutral rounded"
+        @click="onClose"><img :src="closeIcon" alt="close"
       >
       </Button>
     </div>
-    <ul class="popup--messages-list" v-if="messages.length">
-      <li class="popup--item" v-for="(message, index) in messages" :key="index">
+    <ul v-if="messages.length" class="popup--messages-list">
+      <li v-for="(message, index) in messages" :key="index" class="popup--item">
         <p>{{ message }}</p>
       </li>
     </ul>
     <span v-else>Для этого заказа пока нет сообщений</span>
     <InputField
-      @onenter="onAdd"
-      style="font-size: 10px; width: 250px;"
       placeholder="Добавить комментарий"
+      style="font-size: 10px; width: 250px;"
+      @onenter="onAdd"
     ></InputField>
   </div>
 </template>

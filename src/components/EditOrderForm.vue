@@ -1,11 +1,11 @@
 <template>
   <div>
     <InputField
-      :disabled="key === 'Уникальный ID' ? true : false"
       v-for="(key, index) in keys"
       :key="index"
-      :value="values[index]"
+      :disabled="key === 'Уникальный ID' ? true : false"
       :index="index"
+      :value="values[index]"
       @update="onChange"
     >{{ key }}
     </InputField>

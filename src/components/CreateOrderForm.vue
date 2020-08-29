@@ -3,10 +3,10 @@
     <InputField
       v-for="(label, index) in labels"
       :key="index"
-      :index="index"
-      :required="label.text === 'Комментарии' ? false : true"
       :htmlType="label.type"
+      :index="index"
       :placeholder="label.placeholder"
+      :required="label.text === 'Комментарии' ? false : true"
       @update="onChange"
     >{{ label.text }}
     </InputField>

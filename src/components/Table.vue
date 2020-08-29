@@ -5,14 +5,14 @@
     </div>
     <ul class="order-list">
       <ListItem
-        @ondelete="onDelete"
-        @comments-click="onCommentsClick"
-        :order="order"
         v-for="order in orders"
         :key="order._id"
+        :order="order"
+        @ondelete="onDelete"
+        @comments-click="onCommentsClick"
       />
     </ul>
-    <Popup @onadd="onAdd" @onclose="onClose" v-if="isPopup" :messages="currentOrderComments"></Popup>
+    <Popup v-if="isPopup" :messages="currentOrderComments" @onadd="onAdd" @onclose="onClose"></Popup>
   </div>
 </template>
 

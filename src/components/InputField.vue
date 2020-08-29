@@ -5,12 +5,12 @@
     </label>
     <input
       :id="index"
-      class="input-field"
+      :disabled="disabled"
       :placeholder="placeholder || ''"
       :required="required"
       :type="htmlType"
       :value="value"
-      :disabled="disabled"
+      class="input-field"
       @change="onChange"
       @keypress.enter="onEnter"
     />

@@ -6,22 +6,22 @@
     <span class="order-list--column">{{ order.courierName }}</span>
     <span class="order-list--column">{{ order.phoneNumber }}</span>
     <div class="order-list--options">
-      <Button type="rounded success" title="Комментарии" @click="onCommentsClick">
+      <Button title="Комментарии" type="rounded success" @click="onCommentsClick">
         {{ order.comments.length }}
       </Button>
       <a :href="order.atiCode">
         <Button type="rounded neutral">
-          <img :src="options.atiLink.src" :alt="options.atiLink.id"/>
+          <img :alt="options.atiLink.id" :src="options.atiLink.src"/>
         </Button>
       </a>
       <router-link :to="`/orders/${order._id}`">
         <Button type="rounded neutral">
-          <img :src="options.edit.src" :alt="options.edit.id"/>
+          <img :alt="options.edit.id" :src="options.edit.src"/>
         </Button>
       </router-link>
       <span @click="onDelete">
         <Button type="rounded neutral">
-          <img :src="options.delete.src" :alt="options.delete.id"/>
+          <img :alt="options.delete.id" :src="options.delete.src"/>
         </Button>
       </span>
     </div>

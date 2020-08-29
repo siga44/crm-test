@@ -1,8 +1,8 @@
 <template>
   <button
-    @click="onClick"
-    :type="htmlType || ''"
     :class="`btn ${type ? (type.search(/\s/) !== -1 ? `btn-${type.split(' ').join(' btn-')}` : `btn-${type}`) : ''}`"
+    :type="htmlType || ''"
+    @click="onClick"
   >
     <slot></slot>
   </button>
