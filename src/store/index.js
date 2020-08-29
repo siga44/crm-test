@@ -17,7 +17,7 @@ export default new Vuex.Store({
       localStorage.setItem('orders-state', JSON.stringify(state))
     },
     updateOrder (state, changedOrder) {
-      const index = indexById(state.orders, changedOrder.id)
+      const index = indexById(state.orders, changedOrder._id)
       const orders = [...state.orders]
       orders[index] = { ...state.orders[index], ...changedOrder }
 

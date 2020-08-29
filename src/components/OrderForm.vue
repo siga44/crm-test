@@ -2,7 +2,7 @@
   <div class="form-wrapper">
     <h2 class="form-title">{{ content.title }}</h2>
     <form class="form" @submit.prevent="onSubmit">
-      <EditOrderForm v-if="order" :order="order" class="form-content" @update="onInputChange"/>
+      <EditOrderForm v-if="order" :order="currentOrder" class="form-content" @update="onInputChange"/>
       <CreateOrderForm v-else class="form-content" @update="onInputChange"/>
       <div class="form-buttons">
         <Button htmlType="submit" type="success">{{ content.successButton }}</Button>
@@ -27,8 +27,21 @@ export default {
     EditOrderForm
   },
   data () {
+    let currentOrder
+    if (this.order) {
+      currentOrder = {
+        _id: this.order._id,
+        orderNumber: this.order.orderNumber,
+        date: this.order.date,
+        company: this.order.company,
+        courierName: this.order.courierName,
+        phoneNumber: this.order.phoneNumber,
+        atiCode: this.order.atiCode
+      }
+    }
+
     return {
-      currentOrder: this.order || {
+      currentOrder: currentOrder || {
         orderNumber: null,
         date: null,
         company: null,
@@ -42,9 +55,7 @@ export default {
     ...mapActions(['createOrder', 'updateOrder']),
     onInputChange (value, index) {
       const key = Object.keys(this.currentOrder)[index];
-      if (key === 'comments') {
-        this.currentOrder[key].push(value);
-      } else if (key === 'date') {
+      if (key === 'date') {
         const date = new Date(value);
         this.currentOrder[key] = date.toLocaleDateString();
       } else {
