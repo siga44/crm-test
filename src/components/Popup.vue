@@ -1,6 +1,6 @@
 <template>
   <div class="popup">
-    <div class="popup--header" >
+    <div class="popup--header">
       <h3 class="popup--title">Комментарии</h3>
       <Button
         @click="onClose"
@@ -11,7 +11,7 @@
     </div>
     <ul class="popup--messages-list" v-if="messages.length">
       <li class="popup--item" v-for="(message, index) in messages" :key="index">
-        <span>{{ message }}</span>
+        <p>{{ message }}</p>
       </li>
     </ul>
     <span v-else>Для этого заказа пока нет сообщений</span>
@@ -41,8 +41,12 @@ export default {
     onClose () {
       this.$emit('onclose')
     },
-    onAdd (comment) {
-      this.$emit('onadd', comment)
+    onAdd (event) {
+      const comment = event.target.value.trim()
+      if (comment) {
+        this.$emit('onadd', comment)
+        event.target.value = ''
+      }
     }
   }
 }
@@ -70,19 +74,23 @@ export default {
 
   &--title {
     font-size: 1.2em;
+    margin-bottom: 1em;
   }
 
   &--messages-list {
+    padding: 1em 0;
+    height: 300px;
+    overflow-y: scroll;
     display: flex;
     flex-flow: column nowrap;
-    height: 100%;
     font-size: 1em;
   }
 
   &--item {
     margin-bottom: 1.4em;
 
-    & > span {
+    & > p {
+      width: 230px;
       padding: 0.5em 1em;
       background-color: #eee;
       border-radius: 5px;

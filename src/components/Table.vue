@@ -4,7 +4,13 @@
       <span v-for="col in cols" :key="col.id" class="table--column-item">{{ col.title }}</span>
     </div>
     <ul class="order-list">
-      <ListItem @comments-click="onCommentsClick" :order="order" v-for="order in orders" :key="order._id"/>
+      <ListItem
+        @ondelete="onDelete"
+        @comments-click="onCommentsClick"
+        :order="order"
+        v-for="order in orders"
+        :key="order._id"
+      />
     </ul>
     <Popup @onadd="onAdd" @onclose="onClose" v-if="isPopup" :messages="currentOrderComments"></Popup>
   </div>
@@ -12,7 +18,7 @@
 
 <script>
 import ListItem from '@/components/ListItem';
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Popup from '@/components/Popup';
 import { elementById } from '@/utils';
 
@@ -51,6 +57,11 @@ export default {
     onAdd (comment) {
       this.currentOrder.comments.push(comment)
       this.updateOrder(this.currentOrder)
+    },
+    onDelete (id) {
+      if (this?.currentOrder?._id === id) {
+        this.onClose()
+      }
     }
   }
 };

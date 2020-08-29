@@ -19,7 +19,7 @@
           <img :src="options.edit.src" :alt="options.edit.id"/>
         </Button>
       </router-link>
-      <span @click="deleteOrder(order._id)">
+      <span @click="onDelete">
         <Button type="rounded neutral">
           <img :src="options.delete.src" :alt="options.delete.id"/>
         </Button>
@@ -54,6 +54,10 @@ export default {
     ...mapActions(['deleteOrder']),
     onCommentsClick () {
       this.$emit('comments-click', this.order._id)
+    },
+    onDelete () {
+      this.$emit('ondelete', this.order._id)
+      this.deleteOrder(this.order._id)
     }
   }
 };

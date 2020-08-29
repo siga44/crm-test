@@ -23,9 +23,18 @@ export default {
   },
   props: ['order'],
   data () {
+    const currentOrder = {
+      _id: this.order._id,
+      orderNumber: this.order.orderNumber,
+      date: this.order.date,
+      company: this.order.company,
+      courierName: this.order.courierName,
+      phoneNumber: this.order.phoneNumber,
+      atiCode: this.order.atiCode
+    }
     return {
-      keys: keysToLabels(Object.keys(this.order)),
-      values: Object.values(this.order)
+      keys: keysToLabels(Object.keys(currentOrder)),
+      values: Object.values(currentOrder)
     };
   },
   methods: {

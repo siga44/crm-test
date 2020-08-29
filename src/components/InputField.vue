@@ -24,9 +24,8 @@ export default {
     onChange ({ target }) {
       this.$emit('update', target.value, this.index);
     },
-    onEnter ({ target }) {
-      this.$emit('onenter', target.value)
-      target.value = ''
+    onEnter (event) {
+      this.$emit('onenter', event)
     }
   }
 };

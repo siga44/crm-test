@@ -1,13 +1,12 @@
 <template>
   <div class="form-wrapper">
     <h2 class="form-title">{{ content.title }}</h2>
-
     <form class="form" @submit.prevent="onSubmit">
-      <EditOrderForm @update="onInputChange" class="form-content" v-if="order" :order="order"/>
+      <EditOrderForm v-if="order" :order="order" class="form-content" @update="onInputChange"/>
       <CreateOrderForm v-else class="form-content" @update="onInputChange"/>
       <div class="form-buttons">
-        <Button type="success" htmlType="submit">{{ content.successButton }}</Button>
-        <Button type="danger" htmlType="button" @onreject="onReject">{{ content.dangerButton }}</Button>
+        <Button htmlType="submit" type="success">{{ content.successButton }}</Button>
+        <Button htmlType="button" type="danger" @onreject="onReject">{{ content.dangerButton }}</Button>
       </div>
     </form>
   </div>
@@ -35,7 +34,6 @@ export default {
         company: null,
         courierName: null,
         phoneNumber: null,
-        comments: [],
         atiCode: null
       }
     };
@@ -59,6 +57,7 @@ export default {
       } else {
         const newOrder = {
           _id: Date.now().toString(32),
+          comments: [],
           ...this.currentOrder
         };
         this.createOrder(newOrder);
