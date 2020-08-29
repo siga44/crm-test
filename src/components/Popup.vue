@@ -16,6 +16,7 @@
     </ul>
     <span v-else>Для этого заказа пока нет сообщений</span>
     <InputField
+      autofocus
       placeholder="Добавить комментарий"
       style="font-size: 10px; width: 250px;"
       @onenter="onAdd"

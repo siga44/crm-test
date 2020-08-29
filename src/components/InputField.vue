@@ -10,6 +10,7 @@
       :required="required"
       :type="htmlType"
       :value="value"
+      :autofocus="autofocus"
       class="input-field"
       @change="onChange"
       @keypress.enter="onEnter"
@@ -19,10 +20,11 @@
 
 <script>
 export default {
-  props: ['index', 'htmlType', 'required', 'placeholder', 'value', 'disabled'],
+  props: ['index', 'htmlType', 'required', 'placeholder', 'value', 'disabled', 'autofocus'],
   methods: {
     onChange ({ target }) {
       this.$emit('update', target.value, this.index);
+      console.log(target.value)
     },
     onEnter (event) {
       this.$emit('onenter', event)

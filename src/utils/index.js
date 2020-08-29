@@ -2,21 +2,42 @@ export const keysToLabels = arr => {
   return arr.map(key => {
     switch (key) {
       case '_id':
-        return 'Уникальный ID'
+        return {
+          text: 'Уникальный ID',
+          type: 'text'
+        }
       case 'orderNumber':
-        return 'Номер заказа'
+        return {
+          text: 'Номер заказа',
+          type: 'number'
+        }
       case 'date':
-        return 'Дата'
+        return {
+          text: 'Дата',
+          type: 'date'
+        }
       case 'company':
-        return 'Название компании'
+        return {
+          text: 'Название компании',
+          type: 'text'
+        }
       case 'courierName':
-        return 'ФИО курьера'
+        return {
+          text: 'ФИО курьера',
+          type: 'text'
+        }
       case 'phoneNumber':
-        return 'Номер телефона'
+        return {
+          text: 'Номер телефона',
+          type: 'tel'
+        }
       case 'comments':
         break
       case 'atiCode':
-        return 'АТИ'
+        return {
+          text: 'АТИ',
+          type: 'url'
+        }
     }
   })
 }
