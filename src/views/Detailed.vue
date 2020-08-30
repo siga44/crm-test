@@ -1,5 +1,6 @@
 <template>
-  <OrderForm :content="content" :order="order"/>
+  <OrderForm v-if="order" :content="content" :order="order"/>
+  <h2 v-else style="text-align: center">Заказа с таким ID не существует</h2>
 </template>
 
 <script>

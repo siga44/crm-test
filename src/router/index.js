@@ -18,6 +18,15 @@ const routes = [
     path: '/orders/:id',
     name: 'Detailed',
     component: () => import('@/views/Detailed')
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 
